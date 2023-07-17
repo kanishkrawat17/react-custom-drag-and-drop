@@ -3,8 +3,8 @@ import TodoInput from './TodoInput';
 import "../css/index.css";
 const TodoList = () => {
   const [pendingTodos, setPendingTodos] = useState([
-    { id: 1, taskName: 'WashDsih' },
-    { id: 2, taskName: 'Take Bathe' },
+    { id: 1, taskName: 'Wash Dishes' },
+    { id: 2, taskName: 'Wash Car' },
   ]);
   const [completedTodos, setCompletedTodos] = useState([]);
 
@@ -13,14 +13,12 @@ const TodoList = () => {
   };
 
   const handleDrop = (e) => {
-    console.log(e, 'handleDrop', e.dataTransfer.getData('text'));
     const itemId = e.dataTransfer.getData('text');
-
-    const removedItemFromCompleted = pendingTodos.find(
+    const removedItem = pendingTodos.find(
       (item) => item.id == itemId
     );
 
-    setCompletedTodos((prevState) => [...prevState, removedItemFromCompleted]);
+    setCompletedTodos((prevState) => [...prevState, removedItem]);
 
     setPendingTodos((prevState) => {
       return prevState.filter((todoItem) => {
@@ -31,7 +29,6 @@ const TodoList = () => {
   };
 
   const handleDragStart = (e, id) => {
-    console.log(e, 'handleDragStart', id);
     e.dataTransfer.setData('text/plain', id);
   };
 
